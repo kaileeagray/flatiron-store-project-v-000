@@ -15,3 +15,11 @@ Item.all.each do |item|
 end
 
 User.create(email: "kag@test.com", password: "testtest")
+
+user = User.create(email: "kailee@test.com", password: "testtest")
+
+cart = Cart.new(user: user)
+cart.items << Item.all
+cart.save
+
+user.current_cart = cart
