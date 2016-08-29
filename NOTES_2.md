@@ -1,0 +1,1 @@
+rails g migration change_data_type_for_price
