@@ -1,6 +1,5 @@
 module ApplicationHelper
-
   def current_cart
-    Cart.find_by(id: params[:id])
+    current_user.current_cart if current_user
   end
 end

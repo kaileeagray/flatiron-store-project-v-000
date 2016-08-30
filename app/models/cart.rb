@@ -1,6 +1,6 @@
 class Cart < ActiveRecord::Base
   belongs_to :user
-  has_many :line_items
+  has_many :line_items, dependent: :destroy
   has_many :items, through: :line_items
 
   def add_item(item)
@@ -8,7 +8,9 @@ class Cart < ActiveRecord::Base
   end
 
   def total
-    items.sum(:price)
+    line_items.collect do |li|
+      li.item.price * li.quantity
+    end.inject(0, :+)
   end
 
 end
